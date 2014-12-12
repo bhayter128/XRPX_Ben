@@ -22,16 +22,19 @@ class ViewController: NSViewController {
     
     @IBAction func rockButtonPressed(sender: AnyObject) {
         self.userChoice_Pic.image = NSImage(named: "rock")
+		self.computerChoice(1)
     }
     
     
     @IBAction func paperButtonPressed(sender: AnyObject) {
         self.userChoice_Pic.image = NSImage(named: "paper")
+		self.computerChoice(2)
     }
     
     
     @IBAction func scissorButtonPressed(sender: AnyObject) {
         self.userChoice_Pic.image = NSImage(named: "scissor")
+		self.computerChoice(3)
     }
     
     //func that returns a random number 1-3
@@ -42,7 +45,7 @@ class ViewController: NSViewController {
    
     
     //func that sets the randomNumber to a var
-    func computerChoice() ->NSImage {
+	func computerChoice(userChoice:Int) {
         var computerChoice_int:Int = randomNumber(1, max:3)
         
         
@@ -55,8 +58,13 @@ class ViewController: NSViewController {
             else if computerChoice_int == 3 {
                 self.computerChoice_Pic.image = NSImage(named: "scissor")
         }
-       
+		self.pickWinner(userChoice, computerChoice: computerChoice_int)
     }
+	
+	func pickWinner(userChoice:Int, computerChoice:Int)
+	{
+		
+	}
         
         
 
