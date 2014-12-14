@@ -8,9 +8,11 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class ViewController: NSViewController
+{
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -20,63 +22,108 @@ class ViewController: NSViewController {
     
     @IBOutlet var computerChoice_Pic: NSImageView!
     
-    @IBAction func rockButtonPressed(sender: AnyObject) {
+    @IBOutlet var winnerText: NSTextField!
+    
+    
+    
+    @IBAction func rockButtonPressed(sender: AnyObject)
+    {
         self.userChoice_Pic.image = NSImage(named: "rock")
 		self.computerChoice(1)
+       
     }
     
     
-    @IBAction func paperButtonPressed(sender: AnyObject) {
+    @IBAction func paperButtonPressed(sender: AnyObject)
+    {
         self.userChoice_Pic.image = NSImage(named: "paper")
 		self.computerChoice(2)
+        
     }
     
     
-    @IBAction func scissorButtonPressed(sender: AnyObject) {
+    @IBAction func scissorButtonPressed(sender: AnyObject)
+    {
         self.userChoice_Pic.image = NSImage(named: "scissor")
 		self.computerChoice(3)
+        
+        
+    }
+    
+    @IBAction func playAgain(sender: AnyObject) {
+        self.userChoice_Pic.image = nil
+        self.computerChoice_Pic.image = nil
+        self.winnerText.stringValue = ""
+        
     }
     
     //func that returns a random number 1-3
-    func randomNumber(min: Int, max:Int) ->Int {
+    func randomNumber(min: Int, max:Int) ->Int
+    {
         return min + Int(arc4random_uniform(uint32(max - min + 1)))
     }
     
    
     
     //func that sets the randomNumber to a var
-	func computerChoice(userChoice:Int) {
+    func computerChoice(userChoice:Int)
+    {
         var computerChoice_int:Int = randomNumber(1, max:3)
         
         
-            if  computerChoice_int == 1 {
-                self.computerChoice_Pic.image = NSImage(named: "rock")
+        if  computerChoice_int == 1
+        {
+            self.computerChoice_Pic.image = NSImage(named: "rock")
         }
-            else if computerChoice_int  == 2 {
-                 self.computerChoice_Pic.image = NSImage(named: "paper")
+        else if computerChoice_int  == 2
+        {
+            self.computerChoice_Pic.image = NSImage(named: "paper")
         }
-            else if computerChoice_int == 3 {
-                self.computerChoice_Pic.image = NSImage(named: "scissor")
+        else if computerChoice_int == 3
+        {
+            self.computerChoice_Pic.image = NSImage(named: "scissor")
         }
-		self.pickWinner(userChoice, computerChoice: computerChoice_int)
+        self.pickWinner(userChoice, computerChoice: computerChoice_int)
     }
-	
-	func pickWinner(userChoice:Int, computerChoice:Int)
+
+    // picks and displays winnder to UI Label
+	func pickWinner(userChoice: Int, computerChoice:Int)
 	{
-		
-	}
         
-        
-
-    
-    
-    
-    override var representedObject: AnyObject? {
-        didSet {
-        // Update the view, if already loaded.
+        if userChoice == computerChoice
+        {
+            self.winnerText.stringValue = "Tie"
         }
-    }
+        else if userChoice == 1 && computerChoice == 2
+        {
+            self.winnerText.stringValue = "Computer Wins!"
+        }
+        else if userChoice == 1 && computerChoice == 3
+        {
+            self.winnerText.stringValue = "User Wins!"
+        }
+        else if userChoice == 2 && computerChoice == 1
+        {
+            self.winnerText.stringValue = "User Wins!"
+        }
+        else if userChoice == 2 && computerChoice == 3
+        {
+            self.winnerText.stringValue = "Computer Wins!"
+        }
+        else if userChoice == 3 && computerChoice == 1
+        {
+            self.winnerText.stringValue = "Computer Wins!"
+        }
+        else if userChoice == 3 && computerChoice == 2
+        {
+             self.winnerText.stringValue = "User Wins!"
+        }
+        
+        
+	}
 
-
+        
 }
+
+
 
